@@ -1,0 +1,91 @@
+
+<div class="container "> 
+    <nav class="navbar navbar-light bg-light">
+        <div class="col-md-4">Quản trị người dùng</div>
+        <div class="col-md-4 offset-md-2 d-flex flex-row-reverse"  > <a class="btn" (click)="Logout()" class="btn btn-success">Đăng Xuất</a>  </div>
+      </nav>
+    <div class="row col-sm-12">
+        <div class="col-sm-4"> 
+            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                <label class="control-label" for="datepicker-start" >Ngày sinh từ</label>
+                <input type="date" class="form-control" id="datepicker-start" [(ngModel)]="StartDate" name="StartDate">
+            </div>
+        </div>
+        <div class="col-sm-4"> 
+            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                <label class="control-label" for="datepicker-end">Đến</label>
+                <input type="date" class="form-control" id="datepicker-end" [(ngModel)]="EndDate" name="EndDate">
+            </div>
+           
+        </div>
+       <div class="col-sm-4"> 
+            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                <label class="control-label" for="Gendel">Giới tính</label>
+                <select class="form-control" [(ngModel)]="Gendel" name="Gendel">
+                <option value="">Tất cả</option>
+                <option value="0">Nam</option>
+                <option value="1">Nữ</option>
+                <option value="2">Khác</option>
+             </select>
+            </div> 
+        </div>
+    </div>
+    <div class="row col-sm-12">
+       <div class="col-sm-6">   
+                <label class="control-label">Tìm kiếm</label>
+                <input type="text" class="form-control" [(ngModel)]="SearchText" name="SearchText" id="SearchText">  
+                <span class="errorMessage">{{Validate}}</span>
+          </div> 
+             <div class="col-sm-2">
+                <button type="submit"class="form-control" (click)="Search()" class="btn btn-success" >
+                   Tìm
+                  </button> 
+             </div>
+             <div class="col-sm-2"> 
+                <button type="submit"class="form-control" (click)="CreateUser()" class="btn btn-success" >
+                   Thêm mới
+                  </button>
+             </div>  
+    </div>
+  
+    <form > 
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col" sortable="username"  >Họ tên</th>
+            <th scope="col" sortable="birthdate"  >Ngày sinh</th>
+            <th scope="col" sortable="gendel" >Giới tính</th>
+            <th scope="col" sortable="phonenumber"  >Điện thoại</th>
+            <th scope="col" sortable="email" >Email</th>
+            <th scope="col">Sửa</th>
+            <th scope="col" >Xóa</th>
+          </tr>
+          </thead>
+          <tbody>  
+          <tr *ngFor="let User of LstUser ; index as i;">    
+            <td scope="row">{{ RowNumber + i +1}}</td> 
+            <td scope="row">{{ User.UserName }}</td>
+            <td scope="row">{{ User.BirthDateConvert }}</td>
+            <td scope="row">{{ User.GendelName }}</td> 
+            <td scope="row">{{ User.PhoneNumber }}</td>
+            <td scope="row">{{ User.Email }}</td>
+            <td scope="row"><a class="btn" (click)="EditUser(User.ID)">Sửa</a></td>
+            <td scope="row"><a class="btn" (click)="DeleteUser(User.ID)">Xóa</a></td>
+          </tr> 
+          </tbody>
+        </table>
+       
+      </form>
+      <ul *ngIf="3" class="pagination"> 
+        <li [ngClass]="{disabled:CurrentPage === 1}" class="page-item previous-item">
+            <a (click)="SetPage(CurrentPage - 1)" class="page-link"><<</a>
+        </li>
+        <li *ngFor="let Page of TotalPage" [ngClass]="{active:CurrentPage === Page}" class="page-item number-item">
+            <a  (click)="SetPage(Page)" class="page-link">{{Page}}</a>
+        </li>
+        <li [ngClass]="{disabled:CurrentPage === TotalPage.length}" class="page-item next-item">
+            <a (click)="SetPage(CurrentPage + 1)" class="page-link">>></a>
+        </li> 
+    </ul>
+</div>
