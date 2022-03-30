@@ -1,0 +1,48 @@
+ 
+<form>
+  <div class="mb-3 row">
+    <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+   
+    <!-- <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span> -->
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col" sortable="username"  >Họ tên</th>
+      <th scope="col" sortable="birthdate"  >Ngày sinh</th>
+      <th scope="col" sortable="gendel" >Giới tính</th>
+      <th scope="col" sortable="phonenumber"  >Điện thoại</th>
+      <th scope="col" sortable="email" >Email</th>
+      <th scope="col">Sửa</th>
+      <th scope="col" >Xóa</th>
+    </tr>
+    </thead>
+    <tbody> 
+    <tr *ngFor="User of ListUser"> 
+      <th scope="row">{{ RowID }}</th>
+      <th scope="row">{{ User.UserName }}</th>
+      <th scope="row">{{ User.BirthDate }}</th>
+      <th scope="row">{{ User.Gendel }}</th>
+      <th scope="row">{{ User.PhoneNumber }}</th>
+      <th scope="row">{{ User.Email }}</th>
+      <th scope="row"><a (click)="EditUser(User.ID)"></a></th>
+      <th scope="row"><a (click)="DeleteUser(User.ID)"></a></th>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+    </ngb-pagination>
+
+    <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div> -->
+
+</form>
