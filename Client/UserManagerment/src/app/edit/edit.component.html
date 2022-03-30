@@ -1,0 +1,55 @@
+<div class="container">   
+    <nav class="navbar navbar-light bg-light">
+        <div class="col-md-4">Cập nhật nhân viên</div>
+        <div class="col-md-4 offset-md-2 d-flex flex-row-reverse"  > <a class="btn" (click)="Logout()" class="btn btn-success">Đăng Xuất</a>  </div>
+      </nav>
+    <form #form="ngForm" class="form-horizontal" (ngSubmit)="onSubmit()">  
+        <div class="form-group row">  
+            <label  class="control-label col-sm-2" for="UserName">Họ tên *</label>   
+            <div class="col-sm-10">  
+            <input type="text" class="form-control" name="UserName" [(ngModel)]="User.UserName"  />  
+            <span *ngIf="User.UserName === ''" class="errorMessage">* Cần phải nhập tên</span>
+            </div>
+        </div>  
+        <div class="form-group row">  
+            <label class="control-label col-sm-2"for="datepicker-start" >Ngày sinh *</label>
+            <div class="col-sm-10">  
+            <input type="date" class="form-control" (change)="CheckAge()" name="BirthDateConvert"  [(ngModel)]="User.BirthDateConvert">
+            <span class="errorMessage">{{BirthDateValidate}}</span>
+            </div>
+        </div>  
+        <div class="form-group row">  
+            <label class="control-label col-sm-2"for="Gendel">Giới tính</label>
+            <div class="col-sm-10">  
+            <select class="form-control" name="Gendel" [(ngModel)]="User.Gendel">
+            <option selected value="0">Nam</option>
+            <option value="1">Nữ</option>
+            <option value="2">Khác</option>
+         </select>
+            </div>
+        </div>  
+        <div class="form-group row">  
+            <label class="control-label col-sm-2"for="PhoneNumber">Điện thoại *</label>   
+            <div class="col-sm-10">  
+            <input type="text" class="form-control" (change)="CheckPhoneNumber()" id="PhoneNumber" name="PhoneNumber" [(ngModel)]="User.PhoneNumber" [maxLength]="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
+            <span class="errorMessage">{{PhoneNumberValidate}}</span>
+        </div>
+        </div>   
+        <div class="form-group row">  
+            <label class="control-label col-sm-2"for="Email">Email:</label>   
+            <div class="col-sm-10">  
+            <input type="Email" class="form-control" (change)="CheckEmail()" id="Email" name="Email" email="true" [(ngModel)]="User.Email"/> 
+            <span class="errorMessage">{{EmailValidate}}</span>
+            </div>
+        </div>   
+        <div class="form-group row">  
+            <div class="col-sm-2">  
+            </div>  
+            <div class="col-sm-4">  
+                <button type="submit" class="btn btn-success">Cập nhật</button>   
+                <button class="btn btn-success" (click)="ReturnIndex()" class="btn btn-success">Về trang quản trị</button>  
+            </div>  
+        </div>  
+    </form>  
+</div>  
+ 
